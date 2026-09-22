@@ -1,37 +1,909 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Tyler Huffmire | Mechanical Engineer</title>
-</head>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tyler Huffmire | Mechanical Engineering Portfolio</title>
+    <meta
+      name="description"
+      content="BYU mechanical engineering student portfolio focused on mechanical design, aerospace, controls, and embedded engineering."
+    />
+    <style>
+      :root {
+        --bg: #f5f5f2;
+        --panel: #ffffff;
+        --panel-alt: #f1f3f4;
+        --text: #111111;
+        --muted: #4a4a4a;
+        --line: #d9d9d6;
+        --accent: #1a3b5d;
+        --tag: #ecefe9;
+        --shadow: 0 10px 24px rgba(17, 17, 17, 0.08);
+      }
 
-<body>
+      * { box-sizing: border-box; }
 
-    <h1>Tyler Huffmire</h1>
-    <h2>Mechanical Engineering Student</h2>
+      html { scroll-behavior: smooth; }
 
-    <p>
-        I'm a mechanical engineering student at BYU interested in
-        aerospace, robotics, controls, and product design.
-    </p>
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
 
-    <h2>Projects</h2>
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
 
-    <h3>UV-C Clean Room</h3>
-    <p>
-        Designed a 10' × 12' UV-C clean room during my engineering internship.
-    </p>
+      img {
+        max-width: 100%;
+        display: block;
+      }
 
-    <h3>ESP32 Smart Alarm Clock</h3>
-    <p>
-        Designed and programmed an ESP32-based touchscreen alarm clock
-        with wireless communication and audio.
-    </p>
+      .container {
+        width: min(1100px, calc(100% - 40px));
+        margin: 0 auto;
+      }
 
-    <h2>Experience</h2>
-    <p>Mechanical Engineering | CAD | Product Design | Controls</p>
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: rgba(245, 245, 242, 0.92);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--line);
+      }
 
-    <h2>Contact</h2>
-    <p>your-email@example.com</p>
+      .nav-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 72px;
+        gap: 24px;
+      }
 
-</body>
+      .brand {
+        font-size: 1.15rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .nav a {
+        font-size: 0.9rem;
+        color: var(--muted);
+        position: relative;
+        padding-bottom: 2px;
+      }
+
+      .nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 100%;
+        height: 1px;
+        background: var(--text);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.2s ease;
+      }
+
+      .nav a:hover::after,
+      .nav a:focus-visible::after {
+        transform: scaleX(1);
+      }
+
+      .button-link,
+      .button-secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--text);
+        padding: 0.8rem 1.3rem;
+        font-weight: 600;
+        transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      }
+
+      .button-link {
+        background: var(--text);
+        color: #fff;
+      }
+
+      .button-secondary {
+        background: transparent;
+        color: var(--text);
+      }
+
+      .button-link:hover,
+      .button-secondary:hover,
+      .button-link:focus-visible,
+      .button-secondary:focus-visible {
+        opacity: 0.92;
+      }
+
+      main { padding: 40px 0 80px; }
+
+      .hero { padding: 56px 0 36px; }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.25fr 0.75fr;
+        gap: 48px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        margin-bottom: 18px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      h1 {
+        margin: 0 0 18px;
+        font-size: clamp(2.6rem, 5vw, 4.4rem);
+        line-height: 0.96;
+        letter-spacing: -0.04em;
+      }
+
+      .hero-copy p {
+        max-width: 60ch;
+        font-size: 1.05rem;
+        color: var(--muted);
+        margin: 0 0 28px;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-bottom: 30px;
+      }
+
+      .mini-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .mini-meta span {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.4rem 0.7rem;
+        border: 1px solid var(--line);
+        background: var(--panel);
+        color: var(--muted);
+        font-size: 0.76rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .profile-frame,
+      .project-media {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .profile-frame {
+        padding: 18px;
+      }
+
+      .profile-card {
+        background: var(--panel-alt);
+        border: 1px solid var(--line);
+        min-height: 420px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      .profile-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .profile-placeholder,
+      .project-placeholder {
+        position: absolute;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.8rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        background: linear-gradient(180deg, #f7f7f5 0%, #ecece7 100%);
+      }
+
+      .section {
+        padding: 48px 0;
+        scroll-margin-top: 72px;
+      }
+
+      .section-header {
+        margin-bottom: 28px;
+      }
+
+      .section-header h2 {
+        margin: 0;
+        font-size: clamp(1.7rem, 2vw, 2.4rem);
+        letter-spacing: -0.04em;
+      }
+
+      .about-grid,
+      .content-grid,
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 28px;
+      }
+
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        padding: 28px;
+        box-shadow: var(--shadow);
+      }
+
+      .card p {
+        margin: 0 0 1rem;
+        color: var(--muted);
+      }
+
+      .card p:last-child { margin-bottom: 0; }
+
+      .info-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 18px;
+      }
+
+      .info-list li {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 10px;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 12px;
+      }
+
+      .info-list li:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .label {
+        font-weight: 700;
+        color: var(--text);
+      }
+
+      .value {
+        color: var(--muted);
+      }
+
+      .timeline {
+        display: grid;
+        gap: 18px;
+      }
+
+      .timeline-item {
+        padding: 18px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .timeline-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .timeline-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 8px;
+      }
+
+      .timeline-top h3 {
+        margin: 0;
+        font-size: 1.12rem;
+      }
+
+      .timeline-item .meta {
+        color: var(--muted);
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .timeline-item ul {
+        margin: 10px 0 0 18px;
+        padding: 0;
+        color: var(--muted);
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+      }
+
+      .project-card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      .project-media {
+        position: relative;
+        height: 220px;
+        border-bottom: none;
+        background: var(--panel-alt);
+      }
+
+      .project-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .project-card .card {
+        flex: 1;
+        border-top: none;
+        box-shadow: none;
+        padding-top: 22px;
+      }
+
+      .project-card h3 {
+        margin: 0 0 12px;
+        font-size: 1.25rem;
+      }
+
+      .project-card p {
+        margin: 0 0 18px;
+        color: var(--muted);
+      }
+
+      .tag-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.35rem 0.7rem;
+        font-size: 0.76rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        border: 1px solid var(--line);
+        background: var(--tag);
+        color: var(--muted);
+      }
+
+      .skills-shell {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 28px;
+      }
+
+      .skill-group {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        padding: 28px;
+        box-shadow: var(--shadow);
+      }
+
+      .skill-group h3 {
+        margin: 0 0 16px;
+        font-size: 1.1rem;
+      }
+
+      .skill-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 12px;
+      }
+
+      .skill-list li {
+        padding: 0.8rem 1rem;
+        border: 1px solid var(--line);
+        background: var(--panel);
+        color: var(--muted);
+      }
+
+      .resume-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+        padding: 24px 28px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+      }
+
+      .resume-box p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .contact-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 14px;
+      }
+
+      .contact-list li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .contact-list li:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .contact-label {
+        font-weight: 700;
+      }
+
+      .site-footer {
+        padding: 24px 0 56px;
+        color: var(--muted);
+        border-top: 1px solid var(--line);
+      }
+
+      @media (max-width: 860px) {
+        .hero-grid,
+        .about-grid,
+        .content-grid,
+        .contact-grid,
+        .skills-shell,
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .nav-wrap {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 20px 0;
+        }
+
+        .nav {
+          gap: 12px 16px;
+        }
+
+        .section {
+          scroll-margin-top: 124px;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .timeline-top,
+        .info-list li {
+          grid-template-columns: 1fr;
+          flex-direction: column;
+        }
+
+        .resume-box {
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a href="#top" class="brand">Tyler Huffmire</a>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="#about">Who I Am</a>
+          <a href="#education">Education</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#resume">Resume</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow">BYU Mechanical Engineering Student</div>
+            <h1>Mechanical design, aerospace systems, controls, and embedded engineering.</h1>
+            <p>
+              I am a BYU mechanical engineering student with interests in mechanical design, aerospace,
+              controls, embedded systems, and hands-on engineering. I enjoy turning ideas into practical systems,
+              solving technical problems, and learning through design, testing, and iteration.
+            </p>
+            <div class="hero-actions">
+              <a class="button-link" href="/resume/resume.pdf" download>Download Resume</a>
+              <a class="button-secondary" href="#projects">View Projects</a>
+            </div>
+            <div class="mini-meta" aria-label="Interests">
+              <span>BYU</span>
+              <span>Provo, UT</span>
+              <span>Mechanical Design</span>
+              <span>Aerospace</span>
+              <span>Controls</span>
+              <span>Embedded Systems</span>
+            </div>
+          </div>
+
+          <div class="profile-frame" aria-label="Profile image">
+            <div class="profile-card">
+              <img src="/images/profile.jpg" alt="Tyler Huffmire profile" onerror="this.style.display='none'; this.parentElement.querySelector('.profile-placeholder').style.display='flex';" />
+              <div class="profile-placeholder">Profile image coming soon</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <div class="container">
+          <div class="section-header">
+            <h2>Who I am</h2>
+          </div>
+          <div class="about-grid">
+            <div class="card">
+              <p>
+                I am a mechanical engineering student at Brigham Young University interested in mechanical design,
+                aerospace, controls, and embedded systems. I am especially motivated by work that combines design,
+                analysis, and hands-on engineering in practical applications.
+              </p>
+              <p>
+                My experience includes CAD-heavy design work, OTS/UV-C clean room design, process improvement, and project work
+                involving controls and embedded systems. I value thoughtful iteration, clear communication, and engineering
+                solutions that are both functional and manufacturable.
+              </p>
+            </div>
+            <div class="card">
+              <ul class="info-list">
+                <li>
+                  <span class="label">School</span>
+                  <span class="value">Brigham Young University</span>
+                </li>
+                <li>
+                  <span class="label">Degree</span>
+                  <span class="value">B.S. Mechanical Engineering</span>
+                </li>
+                <li>
+                  <span class="label">Location</span>
+                  <span class="value">Provo, UT</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="education" class="section">
+        <div class="container">
+          <div class="section-header">
+            <h2>Education</h2>
+          </div>
+          <div class="card">
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-top">
+                  <h3>B.S. Mechanical Engineering</h3>
+                  <span class="meta">Expected April 2027</span>
+                </div>
+                <div class="meta">Brigham Young University</div>
+                <ul>
+                  <li>GPA: 3.86</li>
+                  <li>Minor in Korean</li>
+                  <li>Relevant coursework: CAD Design, Materials Science, Differential Equations, Control Systems, and relevant aerospace/aerodynamics coursework.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="experience" class="section">
+        <div class="container">
+          <div class="section-header">
+            <h2>Engineering experience</h2>
+          </div>
+          <div class="card">
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-top">
+                  <h3>Ultralux — Product Development Engineer</h3>
+                  <span class="meta">May 2026 - Aug 2026</span>
+                </div>
+                <ul>
+                  <li>Worked on troubleshooting and repairing water purification machines.</li>
+                  <li>Identified machine failure points and suggested improvements.</li>
+                  <li>Communicated potential improvements with the manufacturer.</li>
+                  <li>Studied the design and operation of white-label water purification systems.</li>
+                  <li>Proposed an Ultralux-owned-IP machine concept.</li>
+                  <li>Created SOPs and helped streamline processes.</li>
+                </ul>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-top">
+                  <h3>AquiSense Inc. — Engineering Intern / Project Manager</h3>
+                  <span class="meta">Jun 2025 - Aug 2025</span>
+                </div>
+                <ul>
+                  <li>Led design of a 10 ft × 12 ft UV-C clean room.</li>
+                  <li>Designed around protecting 20+ production employees.</li>
+                  <li>Worked with approximately 250 nm UV-C systems.</li>
+                  <li>Designed storage for approximately $16,000 of UV-C lamps.</li>
+                  <li>Coordinated with 5 engineers, the VP of Operations, and the CEO.</li>
+                  <li>150+ hours of Onshape/CAD work.</li>
+                  <li>Approximately 8 design iterations and 7+ design reviews.</li>
+                  <li>Used 80/20 T-slot framing, polycarbonate, PVC strip curtains, seals, and related materials.</li>
+                </ul>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-top">
+                  <h3>BYU Mechanical Engineering Department — Teaching Assistant</h3>
+                  <span class="meta">Experience</span>
+                </div>
+                <ul>
+                  <li>Supported approximately 78 students.</li>
+                  <li>Worked on a 4-person TA team.</li>
+                  <li>Handled grading and feedback.</li>
+                  <li>Helped revise exam questions.</li>
+                </ul>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-top">
+                  <h3>BYU Student Health Center — Building Management</h3>
+                  <span class="meta">Experience</span>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-top">
+                  <h3>Edison High School — Teacher Aide</h3>
+                  <span class="meta">Experience</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="section">
+        <div class="container">
+          <div class="section-header">
+            <h2>Projects</h2>
+          </div>
+          <div class="projects-grid">
+            <article class="project-card">
+              <div class="project-media">
+                <img src="/images/projects/gps-denied-drone-navigation.jpg" alt="GPS-Denied Drone Navigation" onerror="this.style.display='none'; this.parentElement.querySelector('.project-placeholder').style.display='flex';" />
+                <div class="project-placeholder">Project image placeholder</div>
+              </div>
+              <div class="card">
+                <h3>GPS-Denied Drone Navigation</h3>
+                <p>
+                  Exploration of navigation and control concepts for autonomous flight without GPS, with room for CAD,
+                  diagrams, and test documentation to be added later.
+                </p>
+                <div class="tag-row">
+                  <span class="tag">Aerospace</span>
+                  <span class="tag">Navigation</span>
+                  <span class="tag">Controls</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-media">
+                <img src="/images/projects/esp32-smart-alarm-clock.jpg" alt="ESP32 Smart Alarm Clock home system" onerror="this.style.display='none'; this.parentElement.querySelector('.project-placeholder').style.display='flex';" />
+                <div class="project-placeholder">Project image placeholder</div>
+              </div>
+              <div class="card">
+                <h3>ESP32 Smart Alarm Clock / Home System</h3>
+                <p>
+                  Embedded systems project focused on connected device control, sensor-driven behavior, and home automation workflows.
+                </p>
+                <div class="tag-row">
+                  <span class="tag">ESP32</span>
+                  <span class="tag">Embedded</span>
+                  <span class="tag">Arduino</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-media">
+                <img src="/images/projects/planar-vtol-control.jpg" alt="Planar VTOL control project" onerror="this.style.display='none'; this.parentElement.querySelector('.project-placeholder').style.display='flex';" />
+                <div class="project-placeholder">Project image placeholder</div>
+              </div>
+              <div class="card">
+                <h3>Planar VTOL Control Project</h3>
+                <p>
+                  Control-system project focused on stabilizing and tuning a planar VTOL concept, with room for plots,
+                  flight data, and design notes later.
+                </p>
+                <div class="tag-row">
+                  <span class="tag">Controls</span>
+                  <span class="tag">Aerospace</span>
+                  <span class="tag">MATLAB</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-media">
+                <img src="/images/projects/airfoil-aerodynamics-analysis.jpg" alt="Airfoil and aerodynamics analysis" onerror="this.style.display='none'; this.parentElement.querySelector('.project-placeholder').style.display='flex';" />
+                <div class="project-placeholder">Project image placeholder</div>
+              </div>
+              <div class="card">
+                <h3>Airfoil / Aerodynamics Analysis</h3>
+                <p>
+                  Analysis work involving airfoil behavior, aerodynamic reasoning, and engineering calculations using relevant tools.
+                </p>
+                <div class="tag-row">
+                  <span class="tag">XFOIL</span>
+                  <span class="tag">Aerodynamics</span>
+                  <span class="tag">MATLAB</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-media">
+                <img src="/images/projects/aqu sense-uvc-clean-room.jpg" alt="AquiSense UV-C clean room design" onerror="this.style.display='none'; this.parentElement.querySelector('.project-placeholder').style.display='flex';" />
+                <div class="project-placeholder">Project image placeholder</div>
+              </div>
+              <div class="card">
+                <h3>AquiSense UV-C Clean Room</h3>
+                <p>
+                  Design work focused on a UV-C clean room layout, employee protection, storage for UV-C lamps, and practical facility design constraints.
+                </p>
+                <div class="tag-row">
+                  <span class="tag">CAD</span>
+                  <span class="tag">Design</span>
+                  <span class="tag">Manufacturing</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" class="section">
+        <div class="container">
+          <div class="section-header">
+            <h2>Technical skills</h2>
+          </div>
+          <div class="skills-shell">
+            <div class="skill-group">
+              <h3>CAD / Design</h3>
+              <ul class="skill-list">
+                <li>Onshape</li>
+                <li>CAD modeling</li>
+                <li>Mechanical design</li>
+                <li>Design iteration</li>
+                <li>Design for manufacturing</li>
+              </ul>
+            </div>
+
+            <div class="skill-group">
+              <h3>Programming / Embedded</h3>
+              <ul class="skill-list">
+                <li>Python</li>
+                <li>C/C++</li>
+                <li>Arduino</li>
+                <li>ESP32</li>
+                <li>Embedded systems</li>
+                <li>ESP-NOW</li>
+              </ul>
+            </div>
+
+            <div class="skill-group">
+              <h3>Engineering Analysis</h3>
+              <ul class="skill-list">
+                <li>MATLAB</li>
+                <li>XFOIL</li>
+                <li>Aerodynamics</li>
+                <li>Control systems</li>
+                <li>Engineering calculations</li>
+                <li>Data analysis</li>
+              </ul>
+            </div>
+
+            <div class="skill-group">
+              <h3>Other</h3>
+              <ul class="skill-list">
+                <li>Technical documentation</li>
+                <li>SOP development</li>
+                <li>Prototyping</li>
+                <li>Failure analysis</li>
+                <li>Korean</li>
+                <li>Git/GitHub</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="resume" class="section">
+        <div class="container">
+          <div class="section-header">
+            <h2>Resume</h2>
+          </div>
+          <div class="resume-box">
+            <p>
+              Resume available for download.
+            </p>
+            <a class="button-link" href="/resume/resume.pdf" download>Download Resume</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section">
+        <div class="container">
+          <div class="section-header">
+            <h2>Contact</h2>
+          </div>
+          <div class="contact-grid">
+            <div class="card">
+              <ul class="contact-list">
+                <li><span class="contact-label">Email</span><span>tyler.huffmire@gmail.com</span></li>
+                <li><span class="contact-label">Phone</span><span>(714) 274-5601</span></li>
+                <li><span class="contact-label">LinkedIn</span><a href="https://www.linkedin.com/in/tyler-huffmire/" target="_blank" rel="noopener noreferrer">linkedin.com/in/tyler-huffmire/</a></li>
+                <li><span class="contact-label">Location</span><span>Provo, UT</span></li>
+              </ul>
+            </div>
+            <div class="card">
+              <p>
+                I am interested in opportunities related to mechanical design, aerospace, controls, embedded systems,
+                and hands-on engineering work. I would welcome the opportunity to connect.
+              </p>
+              <a class="button-secondary" href="mailto:tyler.huffmire@gmail.com">Get In Touch</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">© 2026 Tyler Huffmire</div>
+    </footer>
+  </body>
 </html>
